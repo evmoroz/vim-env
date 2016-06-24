@@ -37,10 +37,10 @@ function! s:ExecuteEnv(envname)
 	let @" = user_register
 	call env#common#OpenEnvWindow(a:envname . 'results')
 	silent normal! ggdG
-	setlocal nowrap nolist nospell nonumber
-	setlocal colorcolumn=0
 	let prevwinid = bufwinnr(prevwin)
 	call append (0, result)
 	silent normal! gg
+	setlocal nowrap nolist nospell nonumber nocursorline
+	setlocal colorcolumn=0
 	execute prevwinid . 'wincmd w'
 endfunction
