@@ -1,13 +1,19 @@
 function! env#mysql#LoadEnv()
-	call env#common#OpenEnvWindow('sql', "__MySQLEnv__")
+	call env#common#OpenEnvWindow('sql')
 	call env#common#MapKey('mysql')
 endfunction
 
-function! env#mysql#ExecuteEnv()
-	return s:SQL('SELECT * FROM so.user_')
+function! env#mysql#ExecuteEnv(buftext)
+	return s:SQL(a:buftext)
 endfunction
 
+let s:mysql_password = -1
+
 function! s:SQL(query)
-	return systemlist("mysql -tu root -p", a:query)
+	if s:mysql_password == -1
+		let s:mysql_password = inputsecret('Enter password for root: ')
+	endif
+
+	return systemlist("mysql -tu root -p".s:mysql_password, a:query)
 endfunction
 
