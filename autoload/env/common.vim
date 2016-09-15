@@ -29,6 +29,7 @@ function! env#common#MapKey(envname)
 endfunction
 
 function! s:ExecuteEnv(envname)
+	echon "Executing " . a:envname . "..."
 	let EnvFunc = function("env#" . a:envname . "#ExecuteEnv")
 	let prevwin = bufname('%')
 	let user_register = @"
@@ -43,4 +44,5 @@ function! s:ExecuteEnv(envname)
 	setlocal nowrap nolist nospell nonumber nocursorline
 	setlocal colorcolumn=0
 	execute prevwinid . 'wincmd w'
+	echon ""
 endfunction
