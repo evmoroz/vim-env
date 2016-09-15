@@ -1,11 +1,12 @@
+let s:plugindir = expand('<sfile>:p:h')
 
 function! env#node#LoadEnv()
 	call env#common#OpenEnvWindow('javascript')
-	execute 'lcd ' . expand('<sfile>:p:h')
 	call env#common#MapKey('node')
 endfunction
 
 function! env#node#ExecuteEnv(buftext)
+	execute 'lcd ' . s:plugindir
 	return s:NODE(a:buftext)
 endfunction
 
